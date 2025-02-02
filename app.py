@@ -1,0 +1,68 @@
+# /// script
+# requires-python = ">=3.11"
+# dependencies = [
+#   "httpx",
+#   "fastapi",
+#   "uvicorn"
+# ]
+# ///
+
+import httpx
+from typing import Dict, Any
+from fastapi import FastAPI, HTTPException
+from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
+import datetime
+
+
+from a2 import format_file_with_prettier
+from a3 import count_wednesdays_in_dates
+
+from tools import tools
+
+now = datetime.datetime.now()
+
+OPENAI_API_KEY = "eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6IjIzZjIwMDUxMzhAZHMuc3R1ZHkuaWl0bS5hYy5pbiJ9.HzOAeKlSj59HyB-KsBBrdAufiYGe7lVLIF3YS8Az1eE"
+OPENAI_API_URL = "http://aiproxy.sanand.workers.dev/openai/v1/chat/completions"
+
+
+# Initialize the FastAPI app
+app = FastAPI()
+
+# CORS Configuration (Allow all origins and headers)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "OPTIONS"],  # Allow OPTIONS for preflight requests
+    allow_headers=["*"],  # Allow all headers
+)
+
+
+def query_gpt(user_input: str, tools: list[Dict[str, Any]]) -> Dict[str, Any]:
+    print(f"Inside query_gpt")
+    response = httpx.post(
+        OPENAI_API_URL,
+        headers={
+            "Authorization": f"Bearer {OPENAI_API_KEY}",
+            "Content-Type": "application/json",
+        },
+        json={
+            "model": "gpt-4o-mini",
+            "messages": [{"role": "user", "content": user_input}],
+            "tools": tools,
+            "tool_choice": "auto",
+        },
+    )
+    # print(f"Response from GPT: {response.json()}")
+    return response.json()["choices"][0]["message"]
+
+
+@app.get("/execute")
+async def get_functions(q: str):
+    print(f"[{now}]Question received:{q}")
+    response = query_gpt(q, tools)
+    # print([tool_call["function"] for tool_call in response["tool_calls"]])
+    return response["tool_calls"][0]["function"]
+
+
