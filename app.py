@@ -13,6 +13,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 import datetime
+import os
 
 
 from a2 import format_file_with_prettier
@@ -22,7 +23,7 @@ from tools import tools
 
 now = datetime.datetime.now()
 
-OPENAI_API_KEY = "eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6IjIzZjIwMDUxMzhAZHMuc3R1ZHkuaWl0bS5hYy5pbiJ9.HzOAeKlSj59HyB-KsBBrdAufiYGe7lVLIF3YS8Az1eE"
+OPENAI_API_KEY = os.environ("OPENAI_API_KEY")
 OPENAI_API_URL = "http://aiproxy.sanand.workers.dev/openai/v1/chat/completions"
 
 
