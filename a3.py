@@ -7,6 +7,10 @@ from datetime import datetime
 
 # Define the paths using os.path
 
+
+
+def count_wednesdays_in_dates(input_file_path=r"/data/dates.txt", output_file_path=r"/data/dates-wednesdays.txt"):
+
 base_path = '/data'
 input_file_path = os.path.join(base_path, 'dates.txt')
 output_file_path = os.path.join(base_path, 'dates-wednesdays.txt')

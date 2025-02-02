@@ -5,7 +5,7 @@
 import subprocess
 import os
 
-def format_file(file_path, prettier_version='3.4.2'):
+def format_file_with_prettier(file_path, prettier_version='3.4.2'):
     # Check if the file exists
     if not os.path.isfile(file_path):
         print(f"The file {file_path} does not exist.")
@@ -22,4 +22,5 @@ file_path = '/data/format.md'
 prettier_version = '3.4.2'  # You can change this version as needed
 
 # Call the function to format the file
-format_file(file_path, prettier_version)
+if __name__ == '__main__':
+    format_file(file_path, prettier_version)
