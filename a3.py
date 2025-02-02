@@ -1,3 +1,6 @@
+# A3. The file /data/dates.txt contains a list of dates, one per line. 
+# Count the number of Wednesdays in the list, and write just the number 
+# to /data/dates-wednesdays.txt
 
 import os
 from datetime import datetime
