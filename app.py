@@ -58,11 +58,14 @@ def query_gpt(user_input: str, tools: list[Dict[str, Any]]) -> Dict[str, Any]:
     return response.json()["choices"][0]["message"]
 
 
-@app.get("/execute")
-async def get_functions(q: str):
+@app.post("/run")
+async def run_task(task: str):
     print(f"[{now}]Question received:{q}")
-    response = query_gpt(q, tools)
+    response = query_gpt(task, tools)
     # print([tool_call["function"] for tool_call in response["tool_calls"]])
     return response["tool_calls"][0]["function"]
 
 
+@app.get("/read")
+async def read_file(path: str):
+    pass
