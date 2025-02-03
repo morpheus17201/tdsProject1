@@ -15,11 +15,17 @@ from fastapi.middleware.cors import CORSMiddleware
 import datetime
 import os
 
-
+from a1 import run_datagen_script
 from a2 import format_file_with_prettier
 from a3 import count_wednesdays_in_dates
 
 from app.tools_definition import tools
+
+# A1 task is to download all data files.
+# Hence this has to be run irrespective of
+# all other tasks
+user_email = "23f2005138@ds.study.iitm.ac.in"
+run_datagen_script(user_email=user_email)
 
 now = datetime.datetime.now()
 
