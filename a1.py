@@ -1,3 +1,11 @@
+# /// script
+# requires-python = ">=3.11"
+# dependencies = [
+#   "requests"
+# ]
+# ///
+
+
 import subprocess
 import requests
 import sys

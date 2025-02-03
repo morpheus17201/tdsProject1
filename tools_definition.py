@@ -7,7 +7,7 @@
 # count_wednesdays_in_dates(input_file_path=r"/data/dates.txt", output_file_path=r"/data/dates-wednesdays.txt")
 
 
-tools = {
+tools = [
     # A1
     # A2
     {
@@ -58,4 +58,4 @@ tools = {
     # A8
     # A9
     # A10
-}
+]

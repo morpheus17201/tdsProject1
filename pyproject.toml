@@ -8,5 +8,6 @@ dependencies = [
   "fastapi",
   "uvicorn",
   "faker",
-  "pillow"
+  "pillow",
+  "requests"
 ]

@@ -3,7 +3,8 @@
 # dependencies = [
 #   "httpx",
 #   "fastapi",
-#   "uvicorn"
+#   "uvicorn",
+#   "requests"
 # ]
 # ///
 
@@ -19,7 +20,7 @@ from a1 import run_datagen_script
 from a2 import format_file_with_prettier
 from a3 import count_wednesdays_in_dates
 
-from app.tools_definition import tools
+from tools_definition import tools
 
 # A1 task is to download all data files.
 # Hence this has to be run irrespective of
@@ -29,7 +30,7 @@ run_datagen_script(user_email=user_email)
 
 now = datetime.datetime.now()
 
-OPENAI_API_KEY = os.environ("OPENAI_API_KEY")
+OPENAI_API_KEY = os.environ["AIPROXY_TOKEN"]
 OPENAI_API_URL = "http://aiproxy.sanand.workers.dev/openai/v1/chat/completions"
 
 
