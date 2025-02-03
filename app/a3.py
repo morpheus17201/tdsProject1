@@ -46,3 +46,11 @@ def count_wednesdays_in_dates(
             output_file.write(str(wednesday_count))
     else:
         print(f"Error: The file {input_file_path} does not exist.")
+
+
+# Call the function to format the file
+if __name__ == "__main__":
+    count_wednesdays_in_dates(
+        input_file_path=r"/data/dates.txt",
+        output_file_path=r"/data/dates-wednesdays.txt",
+    )
