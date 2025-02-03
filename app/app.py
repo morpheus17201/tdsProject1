@@ -76,3 +76,9 @@ async def run_task(task: str):
 @app.get("/read")
 async def read_file(path: str):
     pass
+
+
+if __name__ == "__main__":
+    import uvicorn
+
+    uvicorn.run(app, host="0.0.0.0", port=8000)
