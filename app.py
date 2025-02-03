@@ -68,7 +68,7 @@ def query_gpt(user_input: str, tools: list[Dict[str, Any]]) -> Dict[str, Any]:
 
 @app.post("/run")
 async def run_task(task: str):
-    print(f"[{now}]Task received:{q}")
+    print(f"[{now}]Task received:{task}")
     response = query_gpt(task, tools)
     # print([tool_call["function"] for tool_call in response["tool_calls"]])
     return response["tool_calls"][0]["function"]
