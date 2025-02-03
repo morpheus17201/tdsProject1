@@ -1,0 +1,12 @@
+[project]
+name = "tdsProject1"
+version = "0.1.0"
+
+
+dependencies = [
+  "httpx",
+  "fastapi",
+  "uvicorn",
+  "faker",
+  "pillow"
+]
