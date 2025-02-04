@@ -168,6 +168,29 @@ tools = [
         },
     },
     # A8
+    {
+        "type": "function",
+        "function": {
+            "name": "extract_numbers_from_image",
+            "description": "Extract any type of numbers from the given image located at input path and writes those numbers at the provided output path",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "input_file_path": {
+                        "type": "string",
+                        "description": "Path to the input file containing image from which the numbers need to be extracted",
+                    },
+                    "output_file_path": {
+                        "type": "string",
+                        "description": "Path to the output file where the extracted nubers will be written",
+                    },
+                },
+                "required": ["input_file_path", "output_file_path"],
+                "additionalProperties": False,
+            },
+            "strict": True,
+        },
+    },
     # A9
     {
         "type": "function",
