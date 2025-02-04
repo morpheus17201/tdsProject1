@@ -144,6 +144,29 @@ tools = [
         },
     },
     # A7
+    {
+        "type": "function",
+        "function": {
+            "name": "extract_sender_email",
+            "description": "Extract sender's email from the given email message by passing it to the LLM model and write it to the given output file",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "input_file_path": {
+                        "type": "string",
+                        "description": "Path to the input file containing email message",
+                    },
+                    "output_file_path": {
+                        "type": "string",
+                        "description": "Path to the output file where the extracted sender's email ID will be written",
+                    },
+                },
+                "required": ["input_file_path", "output_file_path"],
+                "additionalProperties": False,
+            },
+            "strict": True,
+        },
+    },
     # A8
     # A9
     # A10
