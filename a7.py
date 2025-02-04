@@ -25,7 +25,7 @@ def extract_sender_email(input_file_path, output_file_path):
         response = httpx.post(
             "http://aiproxy.sanand.workers.dev/openai/v1/chat/completions",
             headers={
-                "Authorization": f"Bearer: {AIPROXY_TOKEN}",
+                "Authorization": f"Bearer {AIPROXY_TOKEN}",
                 "Content-Type": "application/json",
             },
             json={
@@ -41,15 +41,15 @@ def extract_sender_email(input_file_path, output_file_path):
         )
 
     except Exception as e:
-        print(f"Error occurred: {e}")
+        print(f"Error occurred while fetching response from GPT: {e}")
         raise e
+        return
 
     result = response.json()
     print(f"Response received from GPT: {result}")
     sender_email = result["choices"][0]["message"]["content"]
 
-    # Extract the email address from the response
-    sender_email = response.choices[0].text.strip()
+    print(f"Sender's email id detected: {sender_email}")
 
     # Write the email address to the output file
     with open(output_file_path, "w") as file:
