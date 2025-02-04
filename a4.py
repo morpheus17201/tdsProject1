@@ -17,8 +17,9 @@ def sort_contacts_file(
         json.dump(sorted_data, outfile, indent=4)
 
 
-# Example usage
-input_path = r"/data/contacts.json"  # Replace with your input file path
-output_path = r"/data/contacts-sorted.json"  # Replace with your output file path
+if __name__ == "__main__":
+    # Example usage
+    input_path = r"/data/contacts.json"  # Replace with your input file path
+    output_path = r"/data/contacts-sorted.json"  # Replace with your output file path
 
-sort_contacts_file(input_path, output_path)
+    sort_contacts_file(input_path, output_path)

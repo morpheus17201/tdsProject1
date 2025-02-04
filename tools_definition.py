@@ -169,5 +169,55 @@ tools = [
     },
     # A8
     # A9
+    {
+        "type": "function",
+        "function": {
+            "name": "get_similar_comments",
+            "description": "Use text embeddings to find out the pair of most similar comments in the given input file and write those to the given output file.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "input_file_path": {
+                        "type": "string",
+                        "description": "Path to the input file containing the comments",
+                    },
+                    "output_file_path": {
+                        "type": "string",
+                        "description": "Path to the output file where the pair of most similar comments will be written",
+                    },
+                },
+                "required": ["input_file_path", "output_file_path"],
+                "additionalProperties": False,
+            },
+            "strict": True,
+        },
+    },
     # A10
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_ticket_sales",
+            "description": "Find out total sales for the given ticket type in the given input file which is sqlite database with table tickets and columns type, units and price. Write the number in the given output file",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "input_file_path": {
+                        "type": "string",
+                        "description": "Path to the input file containing the database with ticket sales data",
+                    },
+                    "output_file_path": {
+                        "type": "string",
+                        "description": "Path to the output file where the value of ticket sales will be written",
+                    },
+                    "ticket_type": {
+                        "type": "string",
+                        "description": "Type of ticket for which the sales need to be calculated",
+                    },
+                },
+                "required": ["input_file_path", "output_file_path", "ticket_type"],
+                "additionalProperties": False,
+            },
+            "strict": True,
+        },
+    },
 ]
