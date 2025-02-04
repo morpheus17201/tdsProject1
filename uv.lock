@@ -280,6 +280,7 @@ dependencies = [
     { name = "fastapi" },
     { name = "httpx" },
     { name = "pillow" },
+    { name = "python-dateutil" },
     { name = "requests" },
     { name = "uvicorn" },
 ]
@@ -290,6 +291,7 @@ requires-dist = [
     { name = "fastapi" },
     { name = "httpx" },
     { name = "pillow" },
+    { name = "python-dateutil" },
     { name = "requests" },
     { name = "uvicorn" },
 ]

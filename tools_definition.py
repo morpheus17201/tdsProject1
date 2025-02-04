@@ -34,7 +34,7 @@ tools = [
             "strict": True,
         },
     },
-    # A4
+    # A3
     {
         "type": "function",
         "function": {
@@ -59,6 +59,31 @@ tools = [
                     },
                 },
                 "required": ["day_of_week", "input_file_path", "output_file_path"],
+                "additionalProperties": False,
+            },
+            "strict": True,
+        },
+    },
+    # A4
+    {
+        "type": "function",
+        "function": {
+            "name": "sort_contacts_file",
+            "description": "Sort the contacts in the json input file by last_name then by first_name and write to given output file.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "input_file_path": {
+                        "type": "string",
+                        "description": "Path to the input file containing the contacts to be sorted",
+                    },
+                    "output_file_path": {
+                        "type": "string",
+                        "description": "Path to the output file where the sorted contacts will be written.",
+                        # "default": "/data/dates-wednesdays.txt",
+                    },
+                },
+                "required": ["input_file_path", "output_file_path"],
                 "additionalProperties": False,
             },
             "strict": True,

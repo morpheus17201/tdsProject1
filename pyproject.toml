@@ -9,5 +9,6 @@ dependencies = [
   "uvicorn",
   "faker",
   "pillow",
-  "requests"
+  "requests",
+  "python-dateutil"
 ]

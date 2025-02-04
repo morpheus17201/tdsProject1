@@ -19,6 +19,7 @@ import os
 from a1 import run_datagen_script
 from a2 import format_file_with_prettier
 from a3 import count_given_weekday_in_dates
+from a4 import sort_contacts_file
 
 
 from tools_definition import tools
