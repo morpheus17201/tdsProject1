@@ -22,6 +22,7 @@ from a2 import format_file_with_prettier
 from a3 import count_given_weekday_in_dates
 from a4 import sort_contacts_file
 from a5 import write_most_recent_log_first_lines
+from a6 import extract_titles_from_markdown_files
 
 
 from tools_definition import tools

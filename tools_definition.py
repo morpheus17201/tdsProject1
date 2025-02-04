@@ -120,6 +120,29 @@ tools = [
         },
     },
     # A6
+    {
+        "type": "function",
+        "function": {
+            "name": "extract_titles_from_markdown_files",
+            "description": "Recursively traverse folder and extract first H1 title from each markdown file and write to output file.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "input_folder": {
+                        "type": "string",
+                        "description": "Path to the input folder containing the markdown files to be processed",
+                    },
+                    "output_file_path": {
+                        "type": "string",
+                        "description": "Path to the output file where the extracted contents of the markdown files will be written.",
+                    },
+                },
+                "required": ["input_folder", "output_file_path"],
+                "additionalProperties": False,
+            },
+            "strict": True,
+        },
+    },
     # A7
     # A8
     # A9
