@@ -56,7 +56,7 @@ def count_given_weekday_in_dates(
 
 # Call the function to format the file
 if __name__ == "__main__":
-    count_wednesdays_in_dates(
+    count_given_weekday_in_dates(
         input_file_path=r"/data/dates.txt",
         output_file_path=r"/data/dates-wednesdays.txt",
     )
