@@ -4,7 +4,8 @@
 #   "httpx",
 #   "fastapi",
 #   "uvicorn",
-#   "requests"
+#   "requests",
+#   "python-dateutil"
 # ]
 # ///
 
@@ -20,6 +21,7 @@ from a1 import run_datagen_script
 from a2 import format_file_with_prettier
 from a3 import count_given_weekday_in_dates
 from a4 import sort_contacts_file
+from a5 import write_most_recent_log_first_lines
 
 
 from tools_definition import tools

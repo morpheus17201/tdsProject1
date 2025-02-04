@@ -90,6 +90,35 @@ tools = [
         },
     },
     # A5
+    {
+        "type": "function",
+        "function": {
+            "name": "write_most_recent_log_first_lines",
+            "description": "Write the first line of n most recent log files in input folder to output path.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "input_folder": {
+                        "type": "string",
+                        "description": "Path to the input folder containing the log file to be processed",
+                    },
+                    "output_file_path": {
+                        "type": "string",
+                        "description": "Path to the output file where the extracted contents of the log file  will be written.",
+                        # "default": "/data/dates-wednesdays.txt",
+                    },
+                    "num_files": {
+                        "type": "integer",
+                        "description": "Number of most recent log files from which the content will be processed",
+                        # "default": "/data/dates-wednesdays.txt",
+                    },
+                },
+                "required": ["input_folder", "output_path", "num_files"],
+                "additionalProperties": False,
+            },
+            "strict": True,
+        },
+    },
     # A6
     # A7
     # A8
