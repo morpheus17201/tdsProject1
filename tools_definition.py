@@ -38,11 +38,15 @@ tools = [
     {
         "type": "function",
         "function": {
-            "name": "count_wednesdays_in_dates",
+            "name": "count_given_weekday_in_date",
             "description": "Count the number of Wednesdays in a list of dates and write the count to a file.",
             "parameters": {
                 "type": "object",
                 "properties": {
+                    "day_of_week": {
+                        "type": "string",
+                        "description": "Day of week to be counted, e.g. wednesday",
+                    },
                     "input_file_path": {
                         "type": "string",
                         "description": "Path to the input file containing a list of dates, one per line.",
@@ -54,7 +58,7 @@ tools = [
                         # "default": "/data/dates-wednesdays.txt",
                     },
                 },
-                "required": ["input_file_path", "output_file_path"],
+                "required": ["day_of_week", "input_file_path", "output_file_path"],
                 "additionalProperties": False,
             },
             "strict": True,

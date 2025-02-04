@@ -8,8 +8,10 @@ from datetime import datetime
 # Define the paths using os.path
 
 
-def count_wednesdays_in_dates(
-    input_file_path=r"/data/dates.txt", output_file_path=r"/data/dates-wednesdays.txt"
+def count_given_weekday_in_dates(
+    day_of_week=r"wednesday",
+    input_file_path=r"/data/dates.txt",
+    output_file_path=r"/data/dates-wednesdays.txt",
 ):
 
     base_path = r"/data"
@@ -23,7 +25,10 @@ def count_wednesdays_in_dates(
             dates = file.readlines()
 
         # Initialize a counter for Wednesdays
-        wednesday_count = 0
+        day_count = 0
+
+        # Adjust weekday received to lowercase
+        day_of_week_lowercase = day_of_week.lower().strip()
 
         # Loop through each date in the list
         for date_str in dates:
@@ -36,14 +41,15 @@ def count_wednesdays_in_dates(
                     date_str, "%Y-%m-%d"
                 )  # Adjust format if needed
                 # Check if it's a Wednesday (weekday() returns 2 for Wednesday)
-                if date_obj.weekday() == 2:
-                    wednesday_count += 1
+                # if date_obj.weekday() == 2:
+                if date_obj.strftime("%A").lower() == day_of_week_lowercase:
+                    day_count += 1
             except ValueError:
                 continue  # Skip invalid date formats
 
         # Write the count of Wednesdays to the output file
         with open(output_file_path, "w") as output_file:
-            output_file.write(str(wednesday_count))
+            output_file.write(str(day_count))
     else:
         print(f"Error: The file {input_file_path} does not exist.")
 
