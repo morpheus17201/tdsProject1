@@ -48,22 +48,30 @@ app.add_middleware(
 
 
 def query_gpt(user_input: str, tools: list[Dict[str, Any]]) -> Dict[str, Any]:
-    print(f"Inside query_gpt")
-    response = httpx.post(
-        OPENAI_API_URL,
-        headers={
-            "Authorization": f"Bearer {OPENAI_API_KEY}",
-            "Content-Type": "application/json",
-        },
-        json={
-            "model": "gpt-4o-mini",
-            "messages": [{"role": "user", "content": user_input}],
-            "tools": tools,
-            "tool_choice": "auto",
-        },
-    )
-    # print(f"Response from GPT: {response.json()}")
-    return response.json()["choices"][0]["message"]
+    print(f"Inside query_gpt. User input received = {user_input}")
+
+    try:
+        response = httpx.post(
+            OPENAI_API_URL,
+            headers={
+                "Authorization": f"Bearer {OPENAI_API_KEY}",
+                "Content-Type": "application/json",
+            },
+            json={
+                "model": "gpt-4o-mini",
+                "messages": [{"role": "user", "content": user_input}],
+                "tools": tools,
+                "tool_choice": "auto",
+            },
+        )
+        print(f"Response from GPT: {response.json()}")
+        return response.json()["choices"][0]["message"]
+
+    except KeyError as e:
+        print(f"KeyError while querying gpt: {str(e)}")
+
+    except Exception as e:
+        print(f"General Error while querying gpt: {str(e)}")
 
 
 @app.post("/run")
@@ -81,5 +89,7 @@ async def read_file(path: str):
 
 if __name__ == "__main__":
     import uvicorn
+
+    print(f"{OPENAI_API_KEY=}")
 
     uvicorn.run(app, host="0.0.0.0", port=8000)
