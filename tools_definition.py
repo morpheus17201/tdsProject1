@@ -113,7 +113,7 @@ tools = [
                         # "default": "/data/dates-wednesdays.txt",
                     },
                 },
-                "required": ["input_folder", "output_path", "num_files"],
+                "required": ["input_folder", "output_file_path", "num_files"],
                 "additionalProperties": False,
             },
             "strict": True,

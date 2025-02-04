@@ -61,7 +61,7 @@ def extract_numbers_from_image(input_file_path, output_file_path):
             ],
         },
     )
-    # print(f"GPT response = {response.json()}")
+    print(f"GPT response = {response.json()}")
     card_number_text = response.json()["choices"][0]["message"]["content"]
     print(f"Extracted text from GPT: {card_number_text}")
     card_number = extract_credit_card_number_from_text(card_number_text)
