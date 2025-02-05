@@ -75,11 +75,10 @@ def query_gpt(user_input: str, tools: list[Dict[str, Any]]) -> Dict[str, Any]:
                 "tool_choice": "auto",
             },
         )
+        print(f"{response.status_code = }")
+        response.raise_for_status()
         print(f"Response from GPT: {response.json()}")
         return response.json()["choices"][0]["message"]
-
-    except KeyError as e:
-        print(f"KeyError while querying gpt: {str(e)}")
 
     except Exception as e:
         print(f"General Error while querying gpt: {str(e)}")
@@ -88,10 +87,15 @@ def query_gpt(user_input: str, tools: list[Dict[str, Any]]) -> Dict[str, Any]:
 @app.post("/run")
 async def run_task(task: str):
     print(f"[{now}]Task received:{task}")
-    response = query_gpt(task, tools)
-    # print([tool_call["function"] for tool_call in response["tool_calls"]])
-    # fname = response["choices"][0]["message"]["tool_calls"][0]["function"]["name"]
+    try:
+        response = query_gpt(task, tools)
+
+    except Exception as e:
+        print(f"Error occurred while querying GPT: {e}")
+        raise HTTPException(status_code=500, detail="Error occurred while querying GPT")
+
     fname = response["tool_calls"][0]["function"]["name"]
+
     print(f"Calling function: {fname}")
     arguments = response["tool_calls"][0]["function"]["arguments"]
     arg_dict = json.loads(arguments)

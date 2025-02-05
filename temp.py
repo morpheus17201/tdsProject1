@@ -64,3 +64,41 @@ arg_dict = json.loads(arguments)
 
 fun = globals()[fname]
 fun(**arg_dict)
+
+
+m = {
+    "id": "chatcmpl-Axe7XfZS1OHgBjQPNJF2mNXSsWZbn",
+    "object": "chat.completion",
+    "created": 1738778939,
+    "model": "gpt-4o-mini-2024-07-18",
+    "choices": [
+        {
+            "index": 0,
+            "message": {
+                "role": "assistant",
+                "content": 'I\'m not sure what you mean by "random xyz task." Could you please provide more details or specify a task you would like me to perform?',
+                "refusal": None,
+            },
+            "logprobs": None,
+            "finish_reason": "stop",
+        }
+    ],
+    "usage": {
+        "prompt_tokens": 770,
+        "completion_tokens": 31,
+        "total_tokens": 801,
+        "prompt_tokens_details": {"cached_tokens": 0, "audio_tokens": 0},
+        "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0,
+        },
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_bd83329f63",
+    "monthlyCost": 0.08107337999999986,
+    "cost": 0.002496,
+    "monthlyRequests": 247,
+    "costError": "crypto.createHash is not a function",
+}
