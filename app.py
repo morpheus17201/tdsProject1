@@ -17,6 +17,7 @@ from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 import datetime
 import os
+import json
 
 from a1 import run_datagen_script
 from a2 import format_file_with_prettier
@@ -89,7 +90,17 @@ async def run_task(task: str):
     print(f"[{now}]Task received:{task}")
     response = query_gpt(task, tools)
     # print([tool_call["function"] for tool_call in response["tool_calls"]])
-    return response["tool_calls"][0]["function"]
+    # fname = response["choices"][0]["message"]["tool_calls"][0]["function"]["name"]
+    fname = response["tool_calls"][0]["function"]["name"]
+    print(f"Calling function: {fname}")
+    arguments = response["tool_calls"][0]["function"]["arguments"]
+    arg_dict = json.loads(arguments)
+    print(f"With the below arguments: {arg_dict = }")
+
+    fun = globals()[fname]
+    fun(**arg_dict)
+
+    return JSONResponse(content={"function": fname, "arguments": arg_dict})
 
 
 @app.get("/read")
