@@ -78,7 +78,11 @@ def query_gpt(user_input: str, tools: list[Dict[str, Any]]) -> Dict[str, Any]:
         print(f"{response.status_code = }")
         response.raise_for_status()
         print(f"Response from GPT: {response.json()}")
-        return response.json()["choices"][0]["message"]
+        return response.json()["choices"][0]["message"]["tool_calls"][0]["function"]
+
+    except KeyError as e:
+        print(f"KeyError occurred while querying GPT: {e}")
+        raise HTTPException(status_code=400, detail=str(e))
 
     except Exception as e:
         print(f"General Error while querying gpt: {str(e)}")
@@ -92,17 +96,24 @@ async def run_task(task: str):
 
     except Exception as e:
         print(f"Error occurred while querying GPT: {e}")
-        raise HTTPException(status_code=500, detail="Error occurred while querying GPT")
+        raise HTTPException(status_code=404, detail="Error occurred while querying GPT")
 
-    fname = response["tool_calls"][0]["function"]["name"]
+    fname = response["name"]
+    arguments = response["arguments"]
+    arg_dict = json.loads(arguments)
 
     print(f"Calling function: {fname}")
-    arguments = response["tool_calls"][0]["function"]["arguments"]
-    arg_dict = json.loads(arguments)
     print(f"With the below arguments: {arg_dict = }")
 
-    fun = globals()[fname]
-    fun(**arg_dict)
+    try:
+        fun = globals()[fname]
+        fun(**arg_dict)
+    except Exception as e:
+        print(f"Error occurred while calling the function: {e}")
+        raise HTTPException(
+            status_code=500,
+            detail="Internal Error occurred while running called the function",
+        )
 
     return JSONResponse(content={"function": fname, "arguments": arg_dict})
 
