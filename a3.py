@@ -23,9 +23,9 @@ def count_given_weekday_in_dates(
     output_file_path=r"/data/dates-wednesdays.txt",
 ):
 
-    base_path = r"/data"
-    input_file_path = os.path.join(base_path, "dates.txt")
-    output_file_path = os.path.join(base_path, "dates-wednesdays.txt")
+    # base_path = r"/data"
+    # input_file_path = os.path.join(base_path, "dates.txt")
+    # output_file_path = os.path.join(base_path, "dates-wednesdays.txt")
 
     # Check if input file exists
     if os.path.exists(input_file_path):

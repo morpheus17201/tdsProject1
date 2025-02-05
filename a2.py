@@ -13,7 +13,8 @@ def format_file_with_prettier(file_path, prettier_version="3.4.2"):
 
     # Run the npx prettier command to format the file in-place
     subprocess.run(
-        ["npx", f"prettier@{prettier_version}", "--write", file_path], check=True
+        ["npx", "--yes", f"prettier@{prettier_version}", "--write", file_path],
+        check=True,
     )
     print(f"Formatted {file_path} using Prettier version {prettier_version}.")
 

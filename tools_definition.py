@@ -38,7 +38,7 @@ tools = [
     {
         "type": "function",
         "function": {
-            "name": "count_given_weekday_in_date",
+            "name": "count_given_weekday_in_dates",
             "description": "Count the number of Wednesdays in a list of dates and write the count to a file.",
             "parameters": {
                 "type": "object",
