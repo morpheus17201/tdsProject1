@@ -18,6 +18,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import datetime
 import os
 import json
+import logging
 
 from a1 import run_datagen_script
 from a2 import format_file_with_prettier
@@ -49,17 +50,17 @@ OPENAI_API_URL = "http://aiproxy.sanand.workers.dev/openai/v1/chat/completions"
 app = FastAPI()
 
 # CORS Configuration (Allow all origins and headers)
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # Allows all origins
-    allow_credentials=True,
-    allow_methods=["GET", "POST", "OPTIONS"],  # Allow OPTIONS for preflight requests
-    allow_headers=["*"],  # Allow all headers
-)
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=["*"],  # Allows all origins
+#     allow_credentials=True,
+#     allow_methods=["GET", "POST", "OPTIONS"],  # Allow OPTIONS for preflight requests
+#     allow_headers=["*"],  # Allow all headers
+# )
 
 
 async def query_gpt(user_input: str, tools: list[Dict[str, Any]]) -> Dict[str, Any]:
-    print(f"Inside query_gpt. User input received = {user_input}")
+    logging.info(f"Inside query_gpt. User input received = {user_input}")
 
     try:
         async with httpx.AsyncClient() as client:
@@ -78,29 +79,29 @@ async def query_gpt(user_input: str, tools: list[Dict[str, Any]]) -> Dict[str, A
             )
             print(f"{response.status_code = }")
             response.raise_for_status()
-            print(f"Response from GPT: {response.json()}")
+            logging.debug(f"Response from GPT: {response.json()}")
             return response.json()["choices"][0]["message"]["tool_calls"][0]["function"]
 
     except KeyError as e:
-        print(f"KeyError occurred while querying GPT: {e}")
+        logging.error(f"KeyError occurred while querying GPT: {e}")
         raise HTTPException(status_code=400, detail=str(e))
 
     except Exception as e:
-        print(f"General Error while querying gpt: {str(e)}")
+        logging.error(f"General Error while querying gpt: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
 
 @app.post("/run")
 async def run_task(task: str):
     print(" " * 80)
-    print("#" * 80)
+    print("=" * 80)
     print(" " * 80)
-    print(f"[{now}]Task received:{task}")
+    logging.info(f"[{now}]Task received:{task}")
     try:
         response = await query_gpt(task, tools)
 
     except Exception as e:
-        print(f"Error occurred while querying GPT: {e}")
+        logging.error(f"Error occurred while querying GPT: {e}")
         raise HTTPException(status_code=404, detail="Error occurred while querying GPT")
 
     fname = response["name"]
@@ -112,13 +113,15 @@ async def run_task(task: str):
 
     arg_dict_str = ", ".join([f"{k}='{v}'" for k, v in arg_dict.items()])
     print("-" * 80)
-    print(f"Calling function: {fname}({arg_dict_str})")
+    logging.info(f"Calling function: {fname}({arg_dict_str})")
 
     try:
         fun = globals()[fname]
         await fun(**arg_dict)
     except Exception as e:
-        print(f"Error occurred while calling the function {fname}. Error is: {e}")
+        logging.error(
+            f"Error occurred while calling the function {fname}. Error is: {e}"
+        )
         raise HTTPException(
             status_code=500,
             detail="Internal Error occurred while running called the function",
@@ -139,6 +142,7 @@ async def read_file(path: str):
 
     # Check if the file exists and is a file
     if not file_path.is_file():
+        logging.error(f"File not found: {file_path}")
         raise HTTPException(status_code=404, detail="File not found")
 
     # Open the file and read its content
@@ -147,12 +151,15 @@ async def read_file(path: str):
             content = file.read()
         return content
     except Exception as e:
+        logging.error(f"Exception from inside app.get('/read')")
         raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}")
 
 
 if __name__ == "__main__":
     import uvicorn
 
-    print(f"{OPENAI_API_KEY=}")
+    levels = ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
+    logging.basicConfig(level="INFO", format="%(message)s\n")
+    logging.debug(f"{OPENAI_API_KEY=}")
 
     uvicorn.run(app, host="0.0.0.0", port=8000)
