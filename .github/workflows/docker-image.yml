@@ -31,7 +31,7 @@ jobs:
       uses: docker/build-push-action@v6
       with:
         push: true
-        tags: 22f2005138-tdsp1:latest
+        tags: morpheus17201/22f2005138-tdsp1:latest
 
     # Step 4: Build the Docker image
     #- name: Build Docker image
