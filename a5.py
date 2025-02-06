@@ -2,7 +2,7 @@ import os
 
 
 def write_most_recent_log_first_lines(
-    input_folder=r"/data/logs/", output_path=r"/data/logs-recent.txt", num_files=10
+    input_folder=r"/data/logs/", output_file_path=r"/data/logs-recent.txt", num_files=10
 ):
     # Get a list of all .log files in the input folder
     log_files = [f for f in os.listdir(input_folder) if f.endswith(".log")]
@@ -17,7 +17,7 @@ def write_most_recent_log_first_lines(
     recent_files = log_files[:num_files]
 
     # Open the output file for writing
-    with open(output_path, "w") as outfile:
+    with open(output_file_path, "w") as outfile:
         for log_file in recent_files:
             # Read the first line of each log file
             with open(log_file, "r") as infile:
@@ -30,5 +30,5 @@ def write_most_recent_log_first_lines(
 
 if __name__ == "__main__":
     input_folder = r"/data/logs/"  # Replace with your input folder path
-    output_path = r"/data/logs-recent.txt"  # Replace with your output file path
-    write_most_recent_log_first_lines(input_folder, output_path)
+    output_file_path = r"/data/logs-recent.txt"  # Replace with your output file path
+    write_most_recent_log_first_lines(input_folder, output_file_path)

@@ -33,7 +33,7 @@ from datagen import (
 openai_api_base = os.getenv(
     "OPENAI_API_BASE", "https://aiproxy.sanand.workers.dev/openai/v1"
 )
-openai_api_key = os.environ["AIPROXY_TOKEN"]
+openai_api_key = os.getenv("AIPROXY_TOKEN")
 
 
 def num(str):

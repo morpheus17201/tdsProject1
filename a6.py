@@ -14,7 +14,8 @@ def extract_titles_from_markdown_files(input_folder, output_file_path):
                         if line.startswith("# "):
                             title = line[2:].strip()
                             relative_path = os.path.relpath(file_path, input_folder)
-                            index[relative_path] = title
+                            relative_path_with_slash = relative_path.replace("\\", "/")
+                            index[relative_path_with_slash] = title
                             break
 
     with open(output_file_path, "w", encoding="utf-8") as f:

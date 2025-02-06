@@ -37,7 +37,7 @@ from tools_definition import tools
 # Hence this has to be run irrespective of
 # all other tasks
 user_email = "23f2005138@ds.study.iitm.ac.in"
-run_datagen_script(user_email=user_email)
+# run_datagen_script(user_email=user_email)
 
 now = datetime.datetime.now()
 
@@ -119,9 +119,14 @@ async def run_task(task: str):
     return JSONResponse(content={"function": fname, "arguments": arg_dict})
 
 
-@app.get("/read")
+from fastapi.responses import PlainTextResponse
+
+
+@app.get("/read", response_class=PlainTextResponse)
 async def read_file(path: str):
-    file_path = os.path(path)
+    from pathlib import Path
+
+    file_path = Path(path)
 
     # Check if the file exists and is a file
     if not file_path.is_file():
@@ -131,7 +136,7 @@ async def read_file(path: str):
     try:
         with open(file_path, "r") as file:
             content = file.read()
-        return {"content": content}
+        return content
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}")
 

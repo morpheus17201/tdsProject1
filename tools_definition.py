@@ -9,6 +9,29 @@
 
 tools = [
     # A1
+    {
+        "type": "function",
+        "function": {
+            "name": "run_datagen_script",
+            "description": "Install uv if reuired and run the run datagen script at the given URL with the given email as the only argument",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "user_email": {
+                        "type": "string",
+                        "description": "User email to be passed as the argument to the datagen script",
+                    },
+                    "script_url": {
+                        "type": "string",
+                        "description": "URL from which the datagen script will be downloaded",
+                    },
+                },
+                "required": ["user_email", "script_url"],
+                "additionalProperties": False,
+            },
+            "strict": True,
+        },
+    },
     # A2
     {
         "type": "function",
