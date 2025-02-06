@@ -58,27 +58,28 @@ app.add_middleware(
 )
 
 
-def query_gpt(user_input: str, tools: list[Dict[str, Any]]) -> Dict[str, Any]:
+async def query_gpt(user_input: str, tools: list[Dict[str, Any]]) -> Dict[str, Any]:
     print(f"Inside query_gpt. User input received = {user_input}")
 
     try:
-        response = httpx.post(
-            OPENAI_API_URL,
-            headers={
-                "Authorization": f"Bearer {OPENAI_API_KEY}",
-                "Content-Type": "application/json",
-            },
-            json={
-                "model": "gpt-4o-mini",
-                "messages": [{"role": "user", "content": user_input}],
-                "tools": tools,
-                "tool_choice": "auto",
-            },
-        )
-        print(f"{response.status_code = }")
-        response.raise_for_status()
-        print(f"Response from GPT: {response.json()}")
-        return response.json()["choices"][0]["message"]["tool_calls"][0]["function"]
+        async with httpx.AsyncClient() as client:
+            response = await client.post(
+                OPENAI_API_URL,
+                headers={
+                    "Authorization": f"Bearer {OPENAI_API_KEY}",
+                    "Content-Type": "application/json",
+                },
+                json={
+                    "model": "gpt-4o-mini",
+                    "messages": [{"role": "user", "content": user_input}],
+                    "tools": tools,
+                    "tool_choice": "auto",
+                },
+            )
+            print(f"{response.status_code = }")
+            response.raise_for_status()
+            print(f"Response from GPT: {response.json()}")
+            return response.json()["choices"][0]["message"]["tool_calls"][0]["function"]
 
     except KeyError as e:
         print(f"KeyError occurred while querying GPT: {e}")
@@ -93,7 +94,7 @@ def query_gpt(user_input: str, tools: list[Dict[str, Any]]) -> Dict[str, Any]:
 async def run_task(task: str):
     print(f"[{now}]Task received:{task}")
     try:
-        response = query_gpt(task, tools)
+        response = await query_gpt(task, tools)
 
     except Exception as e:
         print(f"Error occurred while querying GPT: {e}")
@@ -124,6 +125,7 @@ from fastapi.responses import PlainTextResponse
 
 @app.get("/read", response_class=PlainTextResponse)
 async def read_file(path: str):
+    print("-" * 80)
     from pathlib import Path
 
     file_path = Path(path)
