@@ -121,7 +121,19 @@ async def run_task(task: str):
 
 @app.get("/read")
 async def read_file(path: str):
-    pass
+    file_path = os.path(path)
+
+    # Check if the file exists and is a file
+    if not file_path.is_file():
+        raise HTTPException(status_code=404, detail="File not found")
+
+    # Open the file and read its content
+    try:
+        with open(file_path, "r") as file:
+            content = file.read()
+        return {"content": content}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}")
 
 
 if __name__ == "__main__":

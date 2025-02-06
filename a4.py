@@ -6,14 +6,14 @@ def sort_contacts_file(
     output_file_path=r"/data/contacts-sorted.json",
 ):
     # Read the data from the input file
-    with open(input_path, "r") as infile:
+    with open(input_file_path, "r") as infile:
         data = json.load(infile)
 
     # Sort the data by 'last_name' first, then by 'first_name'
     sorted_data = sorted(data, key=lambda x: (x["last_name"], x["first_name"]))
 
     # Write the sorted data to the output file
-    with open(output_path, "w") as outfile:
+    with open(output_file_path, "w") as outfile:
         json.dump(sorted_data, outfile, indent=4)
 
 
