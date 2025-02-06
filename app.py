@@ -86,6 +86,7 @@ def query_gpt(user_input: str, tools: list[Dict[str, Any]]) -> Dict[str, Any]:
 
     except Exception as e:
         print(f"General Error while querying gpt: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 @app.post("/run")
