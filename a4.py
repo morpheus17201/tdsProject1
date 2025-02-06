@@ -1,7 +1,7 @@
 import json
 
 
-def sort_contacts_file(
+async def sort_contacts_file(
     input_file_path=r"/data/contacts.json",
     output_file_path=r"/data/contacts-sorted.json",
 ):

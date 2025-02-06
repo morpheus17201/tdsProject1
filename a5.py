@@ -1,7 +1,7 @@
 import os
 
 
-def write_most_recent_log_first_lines(
+async def write_most_recent_log_first_lines(
     input_folder=r"/data/logs/", output_file_path=r"/data/logs-recent.txt", num_files=10
 ):
     # Get a list of all .log files in the input folder

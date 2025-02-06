@@ -1,7 +1,7 @@
 import sqlite3
 
 
-def calculate_ticket_sales(input_file_path, output_file_path, ticket_type="Gold"):
+async def calculate_ticket_sales(input_file_path, output_file_path, ticket_type="Gold"):
     # Connect to the SQLite database
     conn = sqlite3.connect(input_file_path)
     cursor = conn.cursor()

@@ -66,7 +66,7 @@ def most_similar(embeddings):
 
 
 # async def get_similar_comments(input_file_path: str, output_file_path: str):
-def get_similar_comments(input_file_path: str, output_file_path: str):
+async def get_similar_comments(input_file_path: str, output_file_path: str):
     print(f"Reading the input file: {input_file_path}")
     with open(input_file_path, "r") as file:
         comments = file.readlines()

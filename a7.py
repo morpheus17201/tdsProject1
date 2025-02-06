@@ -10,7 +10,7 @@ import httpx
 import os
 
 
-def extract_sender_email(input_file_path, output_file_path):
+async def extract_sender_email(input_file_path, output_file_path):
     AIPROXY_TOKEN = os.environ["AIPROXY_TOKEN"]
     # Read the email content from the input file
     with open(input_file_path, "r") as file:

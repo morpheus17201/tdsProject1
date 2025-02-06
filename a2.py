@@ -5,7 +5,7 @@ import subprocess
 import os
 
 
-def format_file_with_prettier(file_path, prettier_version="3.4.2"):
+async def format_file_with_prettier(file_path, prettier_version="3.4.2"):
     # Check if the file exists
     if not os.path.isfile(file_path):
         print(f"The file {file_path} does not exist.")

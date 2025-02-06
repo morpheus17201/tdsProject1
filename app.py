@@ -109,7 +109,7 @@ async def run_task(task: str):
 
     try:
         fun = globals()[fname]
-        fun(**arg_dict)
+        await fun(**arg_dict)
     except Exception as e:
         print(f"Error occurred while calling the function {fname}. Error is: {e}")
         raise HTTPException(

@@ -17,7 +17,7 @@ from dateutil import parser
 # Define the paths using os.path
 
 
-def count_given_weekday_in_dates(
+async def count_given_weekday_in_dates(
     day_of_week=r"wednesday",
     input_file_path=r"/data/dates.txt",
     output_file_path=r"/data/dates-wednesdays.txt",

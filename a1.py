@@ -11,7 +11,7 @@ import requests
 import sys
 
 
-def run_datagen_script(
+async def run_datagen_script(
     user_email=r"23f2005138@ds.study.iitm.ac.in",
     script_url="https://raw.githubusercontent.com/sanand0/tools-in-data-science-public/tds-2025-01/project-1/datagen.py",
 ):

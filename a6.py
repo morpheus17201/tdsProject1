@@ -2,7 +2,7 @@ import os
 import json
 
 
-def extract_titles_from_markdown_files(input_folder, output_file_path):
+async def extract_titles_from_markdown_files(input_folder, output_file_path):
     index = {}
 
     for root, _, files in os.walk(input_folder):
