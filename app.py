@@ -109,7 +109,7 @@ async def run_task(task: str):
         fun = globals()[fname]
         fun(**arg_dict)
     except Exception as e:
-        print(f"Error occurred while calling the function: {e}")
+        print(f"Error occurred while calling the function {fname}. Error is: {e}")
         raise HTTPException(
             status_code=500,
             detail="Internal Error occurred while running called the function",
