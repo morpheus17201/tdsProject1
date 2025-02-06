@@ -37,7 +37,7 @@ jobs:
 
     - name: Push Docker image
       run: |
-        docker push ${{ secrets.DOCKER_USERNAME }}/22f2005138_TDSP1:${{ github.sha }}
-        docker tag ${{ secrets.DOCKER_USERNAME }}/22f2005138_TDSP1:${{ github.sha }} ${{ secrets.DOCKER_USERNAME }}/22f2005138_TDSP1:latest
-        docker push ${{ secrets.DOCKER_USERNAME }}/22f2005138_TDSP1:latest
+        docker push ${{ secrets.DOCKER_USERNAME }}/22f2005138-TDSP1:${{ github.sha }}
+        docker tag ${{ secrets.DOCKER_USERNAME }}/22f2005138-TDSP1:${{ github.sha }} ${{ secrets.DOCKER_USERNAME }}/22f2005138-TDSP1:latest
+        docker push ${{ secrets.DOCKER_USERNAME }}/22f2005138-TDSP1:latest
 
