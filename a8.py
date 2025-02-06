@@ -78,11 +78,15 @@ async def extract_numbers_from_image(input_file_path, output_file_path):
         print(f"Extracted credit card number has been written to {output_file_path}")
 
     except KeyError as e:
-        print(f"KeyError occurred while querying GPT: {e}")
+        print(
+            f"INSIDE EXTRACT_NUMBERS_FROM_IMAGE IN A8. KeyError occurred while querying GPT: {e}"
+        )
         raise HTTPException(status_code=400, detail=str(e))
 
     except Exception as e:
-        print(f"General Error while querying gpt: {str(e)}")
+        print(
+            f"INSIDE EXTRACT_NUMBERS_FROM_IMAGE IN A8. General Error while querying gpt: {str(e)}"
+        )
         raise HTTPException(status_code=500, detail=str(e))
 
 

@@ -27,22 +27,31 @@ def get_similarity_from_embeddings(emb1: list[float], emb2: list[float]) -> floa
 
 
 # async def embed_list(text_list: list[str]) -> list[float]:
-def embed_list(text_list: list[str]) -> list[float]:
+async def embed_list(text_list: list[str]) -> list[float]:
     OPENAI_API_KEY = os.environ["AIPROXY_TOKEN"]
     OPENAI_API_URL = "http://aiproxy.sanand.workers.dev/openai/v1/embeddings"
     """Get embedding vector for text using OpenAI's API."""
-    # async with httpx.AsyncClient() as client:
-    # with httpx.AsyncClient() as client:
-    # response = await client.post(
-    response = httpx.post(
-        OPENAI_API_URL,
-        headers={"Authorization": f"Bearer {OPENAI_API_KEY}"},
-        json={"model": "text-embedding-3-small", "input": text_list},
-    )
-    # print(f'{response.json()["data"][0]["embedding"]}')
-    emb_list = [emb["embedding"] for emb in response.json()["data"]]
-    print(f"Number of embeddings returned = {len(emb_list)}")
-    return emb_list
+    try:
+        async with httpx.AsyncClient() as client:
+            # with httpx.AsyncClient() as client:
+            response = await client.post(
+                # response = httpx.post(
+                OPENAI_API_URL,
+                headers={"Authorization": f"Bearer {OPENAI_API_KEY}"},
+                json={"model": "text-embedding-3-small", "input": text_list},
+            )
+        # print(f'{response.json()["data"][0]["embedding"]}')
+        emb_list = [emb["embedding"] for emb in response.json()["data"]]
+        print(f"Number of embeddings returned = {len(emb_list)}")
+        return emb_list
+
+    except KeyError as e:
+        print(f"INSIDE EMBED_LIST IN A9. KeyError occurred while querying GPT: {e}")
+        raise HTTPException(status_code=400, detail=str(e))
+
+    except Exception as e:
+        print(f"INSIDE EMBED_LIST IN A9. General Error while querying gpt: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 def most_similar(embeddings):
@@ -73,7 +82,7 @@ async def get_similar_comments(input_file_path: str, output_file_path: str):
 
     print(f"Embedding the comments")
     # embeddings = await embed_list(comments)
-    embeddings = embed_list(comments)
+    embeddings = await embed_list(comments)
     embed_dict = dict(zip(comments, embeddings))
     most_similar_pair = most_similar(embed_dict)
     print(f"Most similar comments: {most_similar_pair}")

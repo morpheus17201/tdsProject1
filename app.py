@@ -92,6 +92,9 @@ async def query_gpt(user_input: str, tools: list[Dict[str, Any]]) -> Dict[str, A
 
 @app.post("/run")
 async def run_task(task: str):
+    print(" " * 80)
+    print("#" * 80)
+    print(" " * 80)
     print(f"[{now}]Task received:{task}")
     try:
         response = await query_gpt(task, tools)
@@ -104,8 +107,12 @@ async def run_task(task: str):
     arguments = response["arguments"]
     arg_dict = json.loads(arguments)
 
-    print(f"Calling function: {fname}")
-    print(f"With the below arguments: {arg_dict = }")
+    # print(f"Calling function: {fname}")
+    # print(f"With the below arguments: {arg_dict = }")
+
+    arg_dict_str = ", ".join([f"{k}='{v}'" for k, v in arg_dict.items()])
+    print("-" * 80)
+    print(f"Calling function: {fname}({arg_dict_str})")
 
     try:
         fun = globals()[fname]
@@ -116,7 +123,7 @@ async def run_task(task: str):
             status_code=500,
             detail="Internal Error occurred while running called the function",
         )
-
+    print("-" * 80)
     return JSONResponse(content={"function": fname, "arguments": arg_dict})
 
 
