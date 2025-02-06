@@ -31,7 +31,7 @@ jobs:
       uses: docker/build-push-action@v6
       with:
         push: true
-        tags: user/tdsp1:latest
+        tags: ${{ secrets.DOCKER_USERNAME }}/tdsp1:latest
 
     # Step 4: Build the Docker image
     #- name: Build Docker image
