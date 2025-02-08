@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: 23f2005138@ds.study.iitm.ac.in 
-        run: ${{ github.actor }} is testing out GitHub Actions
+        run: echo 'Testing the scheduled run for TDS Week 4, Q.9'
       
         
       - name: Commit and push changes
