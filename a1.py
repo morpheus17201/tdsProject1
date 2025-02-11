@@ -13,10 +13,10 @@ import sys
 
 async def run_datagen_script(
     user_email=r"23f2005138@ds.study.iitm.ac.in",
-    script_url="https://raw.githubusercontent.com/sanand0/tools-in-data-science-public/tds-2025-01/project-1/datagen.py",
+    script_url=r"https://raw.githubusercontent.com/sanand0/tools-in-data-science-public/tds-2025-01/project-1/datagen.py",
 ):
     # Step 1: Download the datagen.py script from the URL
-    script_url = "https://raw.githubusercontent.com/sanand0/tools-in-data-science-public/tds-2025-01/project-1/datagen.py"
+    #script_url = "https://raw.githubusercontent.com/sanand0/tools-in-data-science-public/tds-2025-01/project-1/datagen.py"
     script_content = requests.get(script_url).text
 
     # Step 2: Save the content to a temporary file (datagen.py)
