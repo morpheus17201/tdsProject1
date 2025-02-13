@@ -69,6 +69,7 @@ async def run_datagen_script(
 if __name__ == "__main__":
     user_email = "23f2005138@ds.study.iitm.ac.in"  # Replace with actual email
     script_url = "https://url_with_error.com"
+    script_url = "https://raw.githubusercontent.com/sanand0/tools-in-data-science-public/tds-2025-01/project-1/datagen.py"
     import asyncio
 
     asyncio.run(run_datagen_script(user_email, script_url))
