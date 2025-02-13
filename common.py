@@ -3,6 +3,7 @@
 # dependencies = [
 #   "httpx",
 #   "requests",
+#   "fastapi",
 # ]
 # ///
 
@@ -10,6 +11,8 @@
 import httpx
 import os
 from typing import Dict, Any
+from fastapi import HTTPException
+
 
 from base_logger import logger
 
