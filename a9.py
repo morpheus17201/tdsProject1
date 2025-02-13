@@ -3,6 +3,7 @@
 # dependencies = [
 #   "numpy",
 #   "httpx",
+#   "fastapi",
 # ]
 # ///
 
@@ -11,6 +12,9 @@ import httpx
 import numpy as np
 import datetime
 import os
+
+from fastapi import HTTPException
+
 
 now = datetime.datetime.now()
 

@@ -22,23 +22,25 @@ async def extract_sender_email(input_file_path, output_file_path):
 
     # Call the LLM to extract the sender's email address
     try:
-        response = httpx.post(
-            "http://aiproxy.sanand.workers.dev/openai/v1/chat/completions",
-            headers={
-                "Authorization": f"Bearer {AIPROXY_TOKEN}",
-                "Content-Type": "application/json",
-            },
-            json={
-                "model": model,
-                "messages": [
-                    {
-                        "role": "system",
-                        "content": "Extract the sender's e-mail address from the following email message",
-                    },
-                    {"role": "user", "content": f"{email_content}"},
-                ],
-            },
-        )
+        async with httpx.AsyncClient() as client:
+            response = await client.post(
+                # response = httpx.post(
+                "http://aiproxy.sanand.workers.dev/openai/v1/chat/completions",
+                headers={
+                    "Authorization": f"Bearer {AIPROXY_TOKEN}",
+                    "Content-Type": "application/json",
+                },
+                json={
+                    "model": model,
+                    "messages": [
+                        {
+                            "role": "system",
+                            "content": "Extract the sender's e-mail address from the following email message",
+                        },
+                        {"role": "user", "content": f"{email_content}"},
+                    ],
+                },
+            )
 
     except Exception as e:
         print(f"Error occurred while fetching response from GPT: {e}")
