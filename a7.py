@@ -9,9 +9,12 @@
 import httpx
 import os
 
+from base_logger import logger
+from common import OPENAI_API_URL, OPENAI_API_KEY
+
 
 async def extract_sender_email(input_file_path, output_file_path):
-    AIPROXY_TOKEN = os.environ["AIPROXY_TOKEN"]
+    # AIPROXY_TOKEN = os.environ["AIPROXY_TOKEN"]
     # Read the email content from the input file
     with open(input_file_path, "r") as file:
         email_content = file.read()
@@ -25,9 +28,9 @@ async def extract_sender_email(input_file_path, output_file_path):
         async with httpx.AsyncClient() as client:
             response = await client.post(
                 # response = httpx.post(
-                "http://aiproxy.sanand.workers.dev/openai/v1/chat/completions",
+                OPENAI_API_URL + r"chat/completions",
                 headers={
-                    "Authorization": f"Bearer {AIPROXY_TOKEN}",
+                    "Authorization": f"Bearer {OPENAI_API_KEY}",
                     "Content-Type": "application/json",
                 },
                 json={

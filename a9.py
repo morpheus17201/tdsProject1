@@ -15,6 +15,9 @@ import os
 
 from fastapi import HTTPException
 
+from base_logger import logger
+from common import OPENAI_API_URL, OPENAI_API_KEY
+
 
 now = datetime.datetime.now()
 
@@ -32,15 +35,15 @@ def get_similarity_from_embeddings(emb1: list[float], emb2: list[float]) -> floa
 
 # async def embed_list(text_list: list[str]) -> list[float]:
 async def embed_list(text_list: list[str]) -> list[float]:
-    OPENAI_API_KEY = os.environ["AIPROXY_TOKEN"]
-    OPENAI_API_URL = "http://aiproxy.sanand.workers.dev/openai/v1/embeddings"
+    # OPENAI_API_KEY = os.environ["AIPROXY_TOKEN"]
+    # OPENAI_API_URL = "http://aiproxy.sanand.workers.dev/openai/v1/embeddings"
     """Get embedding vector for text using OpenAI's API."""
     try:
         async with httpx.AsyncClient() as client:
             # with httpx.AsyncClient() as client:
             response = await client.post(
                 # response = httpx.post(
-                OPENAI_API_URL,
+                OPENAI_API_URL + "embeddings",
                 headers={"Authorization": f"Bearer {OPENAI_API_KEY}"},
                 json={"model": "text-embedding-3-small", "input": text_list},
             )

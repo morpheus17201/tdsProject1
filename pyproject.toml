@@ -10,5 +10,7 @@ dependencies = [
   "faker",
   "pillow",
   "requests",
-  "python-dateutil"
+  "python-dateutil",
+  "numpy>=2.2.3",
+  "markdown>=3.7",
 ]

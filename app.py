@@ -41,17 +41,25 @@ from a10 import calculate_ticket_sales
 from tools_a import tools
 
 from common import query_gpt
+from common import OPENAI_API_URL, OPENAI_API_KEY
 
 # A1 task is to download all data files.
 # Hence this has to be run irrespective of
 # all other tasks
-user_email = "23f2005138@ds.study.iitm.ac.in"
-# run_datagen_script(user_email=user_email)
+# user_email = "23f2005138@ds.study.iitm.ac.in"
+# # run_datagen_script(user_email=user_email)
 
 now = datetime.datetime.now()
 
-OPENAI_API_KEY = os.environ["AIPROXY_TOKEN"]
-OPENAI_API_URL = "http://aiproxy.sanand.workers.dev/openai/v1/chat/completions"
+# USE_PERSONAL_TOKEN = True
+
+# if USE_PERSONAL_TOKEN:
+#     OPENAI_API_KEY = os.environ["OPENAI_API_MYKEY"]
+#     OPENAI_API_URL = "https://api.openai.com/v1/chat/completions"
+
+# else:
+#     OPENAI_API_KEY = os.environ["AIPROXY_TOKEN"]
+#     OPENAI_API_URL = "http://aiproxy.sanand.workers.dev/openai/v1/chat/completions"
 
 
 # Initialize the FastAPI app
@@ -97,7 +105,12 @@ async def run_task(task: str):
     print(" " * 80)
     logger.info(f"[{now}]Task received:{task}")
     try:
-        response = await query_gpt(task, tools)
+        response = await query_gpt(
+            task,
+            tools,
+            OPENAI_API_KEY=OPENAI_API_KEY,
+            OPENAI_API_URL=OPENAI_API_URL + r"chat/completions",
+        )
 
     except Exception as e:
         logger.error(f"Error occurred while querying GPT: {e}")
@@ -158,7 +171,7 @@ if __name__ == "__main__":
     import uvicorn
 
     levels = ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
-    #logger.basicConfig(level="INFO", format="%(message)s\n")
+    # logger.basicConfig(level="INFO", format="%(message)s\n")
     logger.debug(f"{OPENAI_API_KEY=}")
 
     uvicorn.run(app, host="0.0.0.0", port=8000)

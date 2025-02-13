@@ -1,9 +1,13 @@
 import os
 
 
+# async def write_most_recent_log_first_lines(
+#     input_folder=r"/data/logs/", output_file_path=r"/data/logs-recent.txt", num_files=10
+# ):
 async def write_most_recent_log_first_lines(
-    input_folder=r"/data/logs/", output_file_path=r"/data/logs-recent.txt", num_files=10
+    input_folder, output_file_path, num_files=10
 ):
+
     # Get a list of all .log files in the input folder
     log_files = [f for f in os.listdir(input_folder) if f.endswith(".log")]
 
