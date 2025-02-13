@@ -7,10 +7,11 @@
 
 
 import httpx
-import os
+
 
 from base_logger import logger
 from common import OPENAI_API_URL, OPENAI_API_KEY
+import json
 
 
 async def extract_sender_email(input_file_path, output_file_path):
@@ -51,7 +52,7 @@ async def extract_sender_email(input_file_path, output_file_path):
         return
 
     result = response.json()
-    print(f"Response received from GPT: {result}")
+    print(f"Response received from GPT: {json.dumps(result, indent=2)}")
     sender_email = result["choices"][0]["message"]["content"]
 
     print(f"Sender's email id detected: {sender_email}")
