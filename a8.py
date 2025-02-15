@@ -2,6 +2,7 @@
 # requires-python = ">=3.11"
 # dependencies = [
 #   "httpx",
+#   "fastapi",
 # ]
 # ///
 
@@ -10,6 +11,10 @@ import base64
 import httpx
 import os
 import re
+from fastapi import HTTPException
+
+
+from common import OPENAI_API_KEY, OPENAI_API_URL
 
 
 def extract_credit_card_number_from_text(text):

@@ -18,7 +18,7 @@ import json
 from base_logger import logger
 
 
-USE_PERSONAL_TOKEN = True
+USE_PERSONAL_TOKEN = False
 
 if USE_PERSONAL_TOKEN:
     OPENAI_API_KEY = os.environ["OPENAI_API_MYKEY"]
