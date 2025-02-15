@@ -19,7 +19,7 @@ tools_b = [
                     "properties": {
                         "input_file_path": {
                             "type": "string",
-                            "description": "Pathwhere the markdown file is stored.",
+                            "description": "Path where the input markdown file is stored.",
                         },
                         "output_file_path": {
                             "type": "string",

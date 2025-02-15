@@ -12,7 +12,7 @@ ENV UV_COMPILE_BYTECODE=1
 ENV UV_LINK_MODE=copy
 
 RUN apt-get update && apt-get install -y \
-    # uv \
+    git \
     npm
 # RUN npm install npm@latest -g && \
 #     npm install n -g && \

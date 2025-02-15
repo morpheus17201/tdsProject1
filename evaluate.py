@@ -33,7 +33,7 @@ from datagen import (
 openai_api_base = os.getenv(
     "OPENAI_API_BASE", "https://aiproxy.sanand.workers.dev/openai/v1"
 )
-openai_api_key = os.getenv("AIPROXY_TOKEN")
+openai_api_key = os.getenv("OPENAI_API_KEY")
 
 
 def num(str):
@@ -70,13 +70,8 @@ async def read(path: str):
 
 async def a1(email: str, **kwargs):
     await run(
-        #         f"""
-        # Install `uv` (if required) and run the script `https://raw.githubusercontent.com/sanand0/tools-in-data-science-public/tds-2025-01/datagen.py`
-        # with `{email}` as the only argument
-        # """
-        # Replacing the URL with the correct one
         f"""
-Install `uv` (if required) and run the script `https://raw.githubusercontent.com/sanand0/tools-in-data-science-public/tds-2025-01/project-1/datagen.py`
+Install `uv` (if required) and run the script `https://raw.githubusercontent.com/sanand0/tools-in-data-science-public/tds-2025-01/datagen.py`
 with `{email}` as the only argument
 """
     )

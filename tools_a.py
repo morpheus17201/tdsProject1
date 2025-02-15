@@ -266,4 +266,56 @@ tools = [
             "strict": True,
         },
     },
+    # B4
+    {
+        "type": "function",
+        "function": {
+            "name": "clone_and_commit",
+            "description": "Clones a git repository, optionally modifies a file, and commits the changes.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "repo_url": {
+                        "type": "string",
+                        "description": "URL of the git repository to clone.",
+                    },
+                    "clone_dir": {
+                        "type": "string",
+                        "description": "Directory where the repository will be cloned. Set to empty string if not specified.",
+                    },
+                    "commit_message": {
+                        "type": "string",
+                        "description": "Message to use for commit. Set to empty string if not provided",
+                    },
+                },
+                "required": ["repo_url", "clone_dir", "commit_message"],
+                "additionalProperties": False,
+            },
+            "strict": True,
+        },
+    },
+    # B9
+    {
+        "type": "function",
+        "function": {
+            "name": "convert_markdown_to_html",
+            "description": "Convert given markdown file to html. If the output file path is provided, the html will be written to the file. If output file path is not provided set it to empty string and return the converted html output as string",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "input_file_path": {
+                        "type": "string",
+                        "description": "Path where the input markdown file is stored.",
+                    },
+                    "output_file_path": {
+                        "type": "string",
+                        "description": "Path to the output file where the sorted contacts will be written. Set to empty string if the output is to be returned and not written as a file",
+                    },
+                },
+                "required": ["input_file_path", "output_file_path"],
+                "additionalProperties": False,
+            },
+            "strict": True,
+        },
+    },
 ]

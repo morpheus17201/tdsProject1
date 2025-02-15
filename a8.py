@@ -58,9 +58,10 @@ async def extract_numbers_from_image(input_file_path, output_file_path):
                             "content": [
                                 {
                                     "type": "text",
-                                    "text": """Extract the string of consecutive digits from this image with length more than 10 digits.
-                                    You must return all digits extracted as a single string. This is VERY important number and you
-                                    must not miss or skip any digit""",
+                                    "text": """You are an accurate extraction engine which extracts numbers from the given image file.
+                                      Extract the string of consecutive digits from this image with length more than 10 digits.
+                                     You must return all digits extracted as a single string. This is VERY important number and you
+                                    must not miss or skip any digit or change order of any digit""",
                                     # "text": "Extract the credit card number from this image",
                                 },
                                 {
