@@ -65,6 +65,13 @@ now = datetime.datetime.now()
 # Initialize the FastAPI app
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['*'],
+    allow_credentials=True,
+    allow_methods=['GET', 'POST'],
+    allow_headers=['*']
+)
 
 # async def query_gpt(user_input: str, tools: list[Dict[str, Any]]) -> Dict[str, Any]:
 #     logger.info(f"Inside query_gpt. User input received = {user_input}")
